@@ -7,7 +7,14 @@ import Reserves from "../components/pages/Reserves.vue";
 import MyComents from "../components/pages/MyComents.vue";
 import ProfileEditor from "../components/pages/ProfileEditor.vue";
 import AdminPanel from "../components/pages/AdminPanel.vue";
+import { createWebHashHistory } from 'vue-router'
 
+const router = createRouter({
+  history: createWebHashHistory(), // Обязательно Hash для GitHub Pages
+  routes: [ ... ]
+})
+
+console.log("fffffff")
 
 const routes = [
     { path: "/", component: Home },
@@ -20,9 +27,5 @@ const routes = [
     { path: '/adminPanel/', name: 'AdminPanel', component: AdminPanel },
 ]
 
-const router = createRouter({
-    history: createWebHashHistory()(),
-    routes
-});
 
 export default router
