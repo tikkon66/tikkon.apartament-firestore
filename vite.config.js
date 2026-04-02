@@ -1,15 +1,15 @@
+import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import path from 'path' // 1. Импортируем path
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [vue()],
-  base: '/tikkon.apartament-firestore/', // Оставляем ваш путь для GitHub Pages
   resolve: {
     alias: {
-      // 2. Настраиваем алиас '@' для папки 'src'
-      '@': path.resolve(__dirname, './src'),
-    },
+      // Это создаст алиас '@', который указывает на вашу папку 'src'
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
   },
+  // Не забудьте вернуть base, если деплоите на GitHub Pages
+  base: '/tikkon.apartament-firestore/' 
 })
