@@ -7,7 +7,7 @@ import SearchItem from '../shared/SearchItem.vue';
 
 // получение данных
 const props = defineProps({
-    isUserData: Boolean
+    isUserData: Number
 })
 const isUserData = computed(() => props.isUserData)
 
@@ -51,7 +51,7 @@ function toString(item) {
 
 </script>
 <template>
-    <div :class="{ none: !isUserData }" class="UsersWrapper">
+    <div :class="{ none: isUserData !== 0 }" class="UsersWrapper">
         <SearchItem :items="users" @update:items="val => usersFix = val" />
 
         <div v-for="(item, index) in usersFix" style="display: flex; flex-direction: column; gap: 5px;">
@@ -164,7 +164,7 @@ function toString(item) {
 @media (max-width:1010px) {
 
     .UserInfoWrapper {
-        max-width: 300px;
+        width: 100%;
         align-items: start;
         flex-direction: column;
         gap: 10px;

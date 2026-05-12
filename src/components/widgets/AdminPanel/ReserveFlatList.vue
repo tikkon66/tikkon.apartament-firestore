@@ -1,20 +1,18 @@
 <script setup>
-import SliderImage from '../Home/SliderImage.vue';
-import SearchItem from '../shared/SearchItem.vue';
-import AddFlat from './AddFlat.vue';
-import ChangeFlat from './ChangeFlat.vue';
-import { useRouter } from 'vue-router';
 import { computed, onMounted, ref } from 'vue';
 import { getFlats } from '../../server';
 import RenderFlatCard from './RenderFlatCard.vue';
+import SearchItem from '../shared/SearchItem.vue';
 
 
 // получение данных
 const props = defineProps({
-    isUserData: Number
+    isFlatData: Number
 })
-const isUserData = computed(() => props.isUserData)
+const isUserData = computed(() => props.isFlatData)
 
+
+const emit = defineEmits(["fix:books"])
 
 // квартиры
 const flats = ref([])
@@ -36,40 +34,22 @@ const flatsFixed = computed(() => {
 });
 
 
-// путь до кв
-const router = useRouter();
-function goToFlat(id) {
-    router.push({ name: 'FlatPage', params: { id: id } })
-};
-
 </script>
 <template>
     <div :class="{ none: isUserData !== 1 }" class="UsersWrapper">
         <SearchItem :items="flats" @update:items="val => flatsSearch = val" />
-        <AddFlat @update:flats="updateFlats()" />
-        <div v-for="flat in flatsFixed" style="display: flex; flex-direction: column; gap: 5px;">
-            <div class="CatalogList">
-                <RenderFlatCard :flat="flat"/>
 
-                <ChangeFlat :flat="flat" @update:flats="updateFlats()" />
+        <div v-for="flat in flatsFixed" style="display: flex; flex-direction: column; gap: 5px;">
+            <div class="CatalogList" style="gap: 5px;">
+                <RenderFlatCard :flat="flat" />
+                <button @click="emit('fix:books', flat.id)">Бронированные дни по этой квартире</button>
             </div>
         </div>
         <b v-if="limit < flatsSearch.length" class="seeMore" @click="limit += 5">Показать ещё...</b>
     </div>
 </template>
+
 <style scoped>
-.CatalogList {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.seeMore {
-    text-align: center;
-    cursor: pointer;
-    text-decoration: underline;
-}
-
 .UsersWrapper {
     margin-top: 30px;
     margin-bottom: 30px;
@@ -82,6 +62,4 @@ function goToFlat(id) {
 .none {
     display: none;
 }
-
-
 </style>

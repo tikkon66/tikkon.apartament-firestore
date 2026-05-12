@@ -18,8 +18,8 @@ function normalText(text) {
     return text.replace(/\s+/g, "").toLowerCase()
 }
 function getStr(e) {
-    console.log(e?.name, e?.type)
-    return [e?.desc || "", e?.location || "", e?.name || "", e?.type || "", e?.role || ""].map(normalText).join(" ")
+    console.log(e?.start, e?.flat, e?.end, e?.createdAt)
+    return [e?.desc || "", e?.location || "", e?.name || "", e?.type || "", e?.role || "", e?.createdAt || "", e?.end || "", e?.start || "", e?.flat || ""].map(normalText).join(" ")
 }
 
 

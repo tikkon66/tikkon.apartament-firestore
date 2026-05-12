@@ -91,13 +91,14 @@ async function reserve() {
 
     const flatRes = {
         start: checkIn.value,
-        end: checkOut.value
+        end: checkOut.value,
+        createdAt: toStringDate(new Date())
     }
     const userRes = {
         idFlat: idFlat,
         start: checkIn.value,
         end: checkOut.value,
-        createdAt: new Date(),
+        createdAt: toStringDate(new Date()),
     }
     function isInReserve() {
         let isIn = false;

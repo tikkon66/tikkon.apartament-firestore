@@ -210,3 +210,60 @@ export async function getComentsByFlatOrUser(id, isFlat = true) {
   }
 }
 
+// получение всех бронированных дней
+export async function getAllBooks() {
+  const booksCol = collection(db, 'reserves')
+  const snapshot1 = await getDocs(booksCol);
+
+  const books = []
+  for (const doc of snapshot1.docs) {
+    books.push({
+      id: doc.id,
+      ...doc.data()
+    })
+  }
+  return books
+}
+
+// Изменить данные с
+// 0
+// {id: '5GF6baDg7eTlYE90GknE', liked: Array(5)}
+// liked
+// : 
+// Array(5)
+// 0
+// : 
+// "\""
+// 1
+// : 
+// end
+// : 
+// "2026-03-31"
+// start
+// : 
+// "2026-03-29"
+// 1
+// {id: '5xeaXPWScTs9TgonijrA', liked: Array(2)}
+
+// на
+// 0
+// {id: '5GF6baDg7eTlYE90GknE', liked: Array(5), flat: name flat}
+// liked
+// : 
+// Array(5)
+// 0
+// : 
+// "\""
+// 1
+// : 
+// end
+// : 
+// "2026-03-31"
+// start
+// : 
+// "2026-03-29"
+// createdAt
+// :
+
+// "2026-03-27"
+

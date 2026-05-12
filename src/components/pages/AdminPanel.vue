@@ -1,5 +1,6 @@
 <script setup>
 import FlatsList from '../widgets/AdminPanel/FlatsList.vue';
+import ReserveList from '../widgets/AdminPanel/ReserveList.vue';
 import UsersList from '../widgets/AdminPanel/UsersList.vue';
 import Footer from '../widgets/Footer.vue';
 import Header from '../widgets/Header.vue';
@@ -13,8 +14,10 @@ const underlineStyle = ref({
     width: "117px"
 });
 
+const isUserData = ref(0);
+
 function setTab(index, event) {
-    isUserData.value = index == 0 ? true : false
+    isUserData.value = index 
     activeTab.value = index;
 
     const el = event.target;
@@ -24,8 +27,6 @@ function setTab(index, event) {
         width: el.offsetWidth + "px"
     };
 }
-
-const isUserData = ref(true);
 
 </script>
 <template>
@@ -42,12 +43,17 @@ const isUserData = ref(true);
                     <div class="tab" :class="{ active: activeTab === 1 }" @click="setTab(1, $event)">
                         Квартиры
                     </div>
+                    <hr>
+                    <div class="tab" :class="{ active: activeTab === 2 }" @click="setTab(2, $event)">
+                        Брони
+                    </div>
 
                     <div class="underline" :style="underlineStyle"></div>
                 </div>
 
                 <UsersList :isUserData="isUserData" />
                 <FlatsList :isUserData="isUserData" />
+                <ReserveList :isUserData="isUserData" />
             </div>
         </div>
 
