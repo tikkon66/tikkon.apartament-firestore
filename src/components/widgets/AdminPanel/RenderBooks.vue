@@ -57,7 +57,7 @@ const booksFixed = computed(() => {
         </div>
 
         <div v-else>
-            Нет данных
+            Нет данных (или нажмите на найти в на поле поиске)
         </div>
     </div>
 </template>
